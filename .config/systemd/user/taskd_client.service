@@ -1,0 +1,6 @@
+[Unit]
+Description=Runs a synchronization of taskwarrior
+
+[Service]
+ExecStart=/usr/bin/task sync
+

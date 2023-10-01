@@ -1,0 +1,10 @@
+[Unit]
+Description=Runs task_sync every hour
+
+[Timer]
+OnBootSec=1min
+OnUnitActiveSec=1h
+Unit=task_sync.service
+
+[Install]
+WantedBy=default.target
