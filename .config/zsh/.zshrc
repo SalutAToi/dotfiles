@@ -1,4 +1,4 @@
-# SOURCING
+# SHELL CONFIGURATIONS (sourcing, env vars, functions)
 ## sourcing oh-my-zsh.sh (and setting theme) required before instant prompt as may require prompt from user
 ZSH_THEME="powerlevel10k/powerlevel10k"
 export ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh" # required to source
@@ -9,28 +9,20 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 ## sourcing p10k
 [[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh ]] || source ${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh
-## fzf
-### add fzf fuzzy completion
-source /usr/share/doc/fzf/examples/completion.zsh
-#### add fzf keybindings
-source /usr/share/doc/fzf/examples/key-bindings.zsh
 
-# SHELL SPECIFIC VARIABLES
-export HISTFILE=${XDG_CACHE_HOME:-$HOME/.config}/zsh/zsh_history
+export HISTFILE=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history
 ## ZSH plugin
 plugins=(vi-mode git taskwarrior copyfile sudo colored-man-pages docker docker-compose gcloud terraform)
 ## enabling vim mode (keybinding, not zsh specific)
 bindkey -v
-
-# SYSTEM/TERM VARIABLES
 ## path : ajout au path de .bin (for user binaries)
 export PATH=$PATH:/home/christophe/.local/bin
 
-# GUI VARIABLES
+# GUI CONFIGURATIONS
 ## qt theme designation
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-# PROGRAM CONFIGURATION VARIABLES
+# PROGRAM CONFIGURATIONS (sourcing, env vars, functions)
 ## VIM
 ### legacy
 ###export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC' # not used with neovim
@@ -48,6 +40,10 @@ export CLOUDSDK_PYTHON_SITEPACKAGES=1 # allows usage of external (non gcloud) py
 export FDFIND_EXCLUSIONS="'__pycache__','.git','site-packages'"
 export FZF_DEFAULT_COMMAND="fdfind --exclude $FDFIND_EXCLUSIONS ."
 export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+### add fzf fuzzy completion
+source /usr/share/doc/fzf/examples/completion.zsh
+#### add fzf keybindings
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 ### default layouts and options
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 ## LASTPASS CLI
@@ -107,7 +103,6 @@ alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 ## ADB
 alias adb='HOME=$ANDROID_HOME adb'
 
-# FUNCTIONS AND CODE
 ## FZF
 ### function for filepath ** completion (vim)
 _fzf_compgen_path() {
