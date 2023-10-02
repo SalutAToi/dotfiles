@@ -41,15 +41,11 @@ call plug#begin("$XDG_DATA_HOME/nvim/plugins")
     Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-" enable treesitter highlighting by default
+" Syntax parser (Treesitter) configuration
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   highlight = {
     enable = true,
-    custom_captures = {
-      -- Highlight the @foo.bar capture group with the "Identifier" highlight group.
-      ["foo.bar"] = "Identifier",
-    },
     -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
     -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
     -- Using this option may slow down your editor, and you may see some duplicate highlights.
@@ -60,7 +56,7 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 " appearence options
-" true color support (alacritty, other temrs, ..)
+" true color support (alacritty, other terms, ..)
 if (empty($TMUX))
   if (has("nvim"))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
