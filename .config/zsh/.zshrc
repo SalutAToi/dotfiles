@@ -36,9 +36,6 @@ setopt hist_find_no_dups
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 # PROGRAM CONFIGURATIONS (sourcing, env vars, functions, uncluttering $HOME)
-## VIM
-### when using vim (not neovim), forces vim to use xdg config
-###export VIMINIT='let $MYVIMRC="${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc" | source $MYVIMRC' # not used with neovim
 ## Taskwarrior
 export TASKRC=${XDG_CONFIG_HOME:-$HOME/.config}/task/taskrc
 ## Vagrant
