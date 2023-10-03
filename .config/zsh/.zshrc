@@ -1,31 +1,44 @@
 # SHELL CONFIGURATIONS (sourcing, env vars, functions)
-## sourcing oh-my-zsh.sh (and setting theme) required before instant prompt as may require prompt from user
-ZSH_THEME="powerlevel10k/powerlevel10k"
-export ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh" # required to source
-source $ZSH/oh-my-zsh.sh
-## p10k instant prompt
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-## sourcing p10k
-[[ ! -f ${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh ]] || source ${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh
-
-export HISTFILE=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history
+#ZSH_THEME="powerlevel10k/powerlevel10k"
 ## ZSH plugin
-plugins=(vi-mode git taskwarrior copyfile sudo colored-man-pages docker docker-compose gcloud terraform)
-## enabling vim mode (keybinding, not zsh specific)
+#plugins=(vi-mode git taskwarrior copyfile sudo colored-man-pages docker docker-compose gcloud terraform)
+## enabling vim mode
 bindkey -v
 ## path : ajout au path de .bin (for user binaries)
 export PATH=$PATH:/home/christophe/.local/bin
+# autocompletion
+autoload -Uz compinit
+## setting completion file path
+compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-"$ZSH_VERSION"
+## case insensitive autocompletion style
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# syntax highlighting
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# HISTORY CONFIGURATION
+## setting histfile location
+export HISTFILE=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history
+## size limits
+HISTSIZE=5000
+SAVEHIST=5000
+# erase and avoid duplicates when searching through the history
+HISTDUP=erase
+setopt appendhistory
+setopt sharehistory
+setopt incappendhistory
+setopt hist_ignore_all_dups
+setopt hist_save_no_dups
+setopt hist_ignore_dups
+setopt hist_find_no_dups
 
 # GUI CONFIGURATIONS
 ## qt theme designation
 export QT_QPA_PLATFORMTHEME=qt5ct
 
-# PROGRAM CONFIGURATIONS (sourcing, env vars, functions)
+# PROGRAM CONFIGURATIONS (sourcing, env vars, functions, uncluttering $HOME)
 ## VIM
-### legacy
-###export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC' # not used with neovim
+### when using vim (not neovim), forces vim to use xdg config
+###export VIMINIT='let $MYVIMRC="${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc" | source $MYVIMRC' # not used with neovim
 ## Taskwarrior
 export TASKRC=${XDG_CONFIG_HOME:-$HOME/.config}/task/taskrc
 ## Vagrant
@@ -112,15 +125,3 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fdfind --type d --exclude '.var' --exclude '__pycache__' --exclude '.git' --exclude 'site-packages' --hidden --follow . "$1"
 }
-## SCRIPT MANAGED CONFIGURATION
-# >>>> Vagrant command completion (start)
-fpath=(/usr/share/rubygems-integration/all/gems/vagrant-2.2.19/contrib/zsh $fpath)
-compinit
-# <<<<  Vagrant command completion (end)
-
-# >>>> Terraform command completion (start)
-complete -o nospace -C /usr/bin/terraform terraform
-# <<<<  Terraform command completion (end)
-# something bash ?
-autoload -U +X bashcompinit && bashcompinit
-compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-"$ZSH_VERSION"
