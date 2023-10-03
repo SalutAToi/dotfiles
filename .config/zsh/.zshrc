@@ -1,19 +1,46 @@
 # SHELL CONFIGURATIONS (sourcing, env vars, functions)
-#ZSH_THEME="powerlevel10k/powerlevel10k"
-## ZSH plugin
-#plugins=(vi-mode git taskwarrior copyfile sudo colored-man-pages docker docker-compose gcloud terraform)
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+# set p10k instant prompt to be quiet
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 ## enabling vim mode
 bindkey -v
 ## path : ajout au path de .bin (for user binaries)
 export PATH=$PATH:/home/christophe/.local/bin
+# plugin manager
+## where to store plugin manager files
+export ADOTDIR=${XDG_DATA_HOME:-$HOME/.local/share}/antigen
+## where to store plugin manager cache
+export ANTIGEN_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/antigen/init.zsh
+source /usr/share/zsh-antigen/antigen.zsh
 # autocompletion
 autoload -Uz compinit
 ## setting completion file path
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-"$ZSH_VERSION"
 ## case insensitive autocompletion style
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# syntax highlighting
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# PLUGINS
+antigen bundles <<EOBUNDLES
+    jeffreytse/zsh-vi-mode
+    ohmyzsh/ohmyzsh plugins/sudo
+    ohmyzsh/ohmyzsh plugins/taskwarrior
+    ohmyzsh/ohmyzsh plugins/command-not-found
+    ohmyzsh/ohmyzsh plugins/colored-man-pages
+    ohmyzsh/ohmyzsh plugins/gcloud
+    ohmyzsh/ohmyzsh plugins/terraform
+    ohmyzsh/ohmyzsh plugins/vagrant
+    zsh-users/zsh-syntax-highlighting
+    zsh-users/zsh-autosuggestions
+    zsh-users/zsh-completions
+EOBUNDLES
+## theme
+antigen theme romkatv/powerlevel10k
+antigen apply
+
+
 
 # HISTORY CONFIGURATION
 ## setting histfile location
@@ -122,3 +149,6 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fdfind --type d --exclude '.var' --exclude '__pycache__' --exclude '.git' --exclude 'site-packages' --hidden --follow . "$1"
 }
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
