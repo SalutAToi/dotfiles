@@ -139,6 +139,8 @@ alias clip='xclip -selection clipboard'
 alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 ## ADB
 alias adb='HOME=$ANDROID_HOME adb'
+## VIM/neovim
+alias vim='nvim'
 
 ## FZF
 ### function for filepath ** completion (vim)
