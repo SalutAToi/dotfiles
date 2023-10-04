@@ -23,10 +23,13 @@ autoload -Uz compinit
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-"$ZSH_VERSION"
 ## case insensitive autocompletion style
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# cd to a path when typed
+## cd to a path when typed
 setopt auto_cd
 
 # PLUGINS
+## workaround vi-mode keybinding issue (before loading plugin)
+### see https://github.com/jeffreytse/zsh-vi-mode/blob/master/README.md
+export ZVM_INIT_MODE=sourcing
 antigen bundles <<EOBUNDLES
     jeffreytse/zsh-vi-mode
     ohmyzsh/ohmyzsh plugins/sudo
@@ -39,6 +42,7 @@ antigen bundles <<EOBUNDLES
     zsh-users/zsh-syntax-highlighting
     zsh-users/zsh-autosuggestions
     zsh-users/zsh-completions
+    ohmyzsh/ohmyzsh plugins/fzf
 EOBUNDLES
 ## theme
 antigen theme romkatv/powerlevel10k
@@ -89,10 +93,6 @@ _fzf_compgen_dir() {
 export FZF_DEFAULT_COMMAND="fdfind ."
 export FZF_DIR_COMMAND="fdfind --type d ."
 export FZF_CTRL_T_COMMAND=$FZF_DIR_COMMAND
-### add fzf fuzzy completion
-source /usr/share/doc/fzf/examples/completion.zsh
-#### add fzf keybindings
-source /usr/share/doc/fzf/examples/key-bindings.zsh
 ### default layouts and options
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 ## LASTPASS CLI
@@ -153,4 +153,3 @@ alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 alias adb='HOME=$ANDROID_HOME adb'
 ## aliasing vim to lunarvim
 alias vim='lvim'
-
