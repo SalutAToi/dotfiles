@@ -1,12 +1,14 @@
 # SHELL CONFIGURATIONS (sourcing, env vars, functions)
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+## Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-# set p10k instant prompt to be quiet
+## set p10k instant prompt to be quiet
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 ## enabling vim mode
 bindkey -v
+## source theme
+source "${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh"
 ## path : ajout au path de .bin (for user binaries)
 export PATH=$PATH:/home/christophe/.local/bin
 # plugin manager
@@ -21,6 +23,8 @@ autoload -Uz compinit
 compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-"$ZSH_VERSION"
 ## case insensitive autocompletion style
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+# cd to a path when typed
+setopt auto_cd
 
 # PLUGINS
 antigen bundles <<EOBUNDLES
@@ -74,9 +78,17 @@ export GAMCFGDIR=/home/christophe/.config/gamadv-xtd3
 export CLOUDSDK_PYTHON_SITEPACKAGES=1 # allows usage of external (non gcloud) py packages
 ## FZF
 ### exclusions 
-export FDFIND_EXCLUSIONS="'__pycache__','.git','site-packages'"
-export FZF_DEFAULT_COMMAND="fdfind --exclude $FDFIND_EXCLUSIONS ."
-export FZF_CTRL_T_COMMAND=$FZF_DEFAULT_COMMAND
+### function for filepath ** completion (vim)
+_fzf_compgen_path() {
+    fdfind --follow . "$1"
+}
+### FZF function for dir ** completion (cd)
+_fzf_compgen_dir() {
+    fdfind --type d --follow . "$1"
+}
+export FZF_DEFAULT_COMMAND="fdfind ."
+export FZF_DIR_COMMAND="fdfind --type d ."
+export FZF_CTRL_T_COMMAND=$FZF_DIR_COMMAND
 ### add fzf fuzzy completion
 source /usr/share/doc/fzf/examples/completion.zsh
 #### add fzf keybindings
@@ -139,18 +151,6 @@ alias clip='xclip -selection clipboard'
 alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 ## ADB
 alias adb='HOME=$ANDROID_HOME adb'
-## VIM/neovim
-alias vim='nvim'
+## aliasing vim to lunarvim
+alias vim='lvim'
 
-## FZF
-### function for filepath ** completion (vim)
-_fzf_compgen_path() {
-  fdfind  --exclude '.var' --exclude '__pycache__' --exclude '.git' --exclude 'site-packages' --hidden --follow . "$1"
-}
-### FZF function for dir ** completion (cd)
-_fzf_compgen_dir() {
-  fdfind --type d --exclude '.var' --exclude '__pycache__' --exclude '.git' --exclude 'site-packages' --hidden --follow . "$1"
-}
-
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
