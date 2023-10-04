@@ -9,6 +9,7 @@ syntax on
 set wrap " line wrapping (line fits in one line)
 set cursorline " highlight current line
 set showmode " display mode in the status bar
+set cursorline " highlight cursor line
 "" hybrid line number (enabling both)
 set number
 set relativenumber
@@ -19,6 +20,7 @@ set smartcase " only ignore case when searching lowercase
 set softtabstop=4
 set shiftwidth=4
 set expandtab " tab is space
+set shiftround " use mutltiples of shiftwidth when indenting
 " search
 set incsearch " search as you type
 set hlsearch " highlight search

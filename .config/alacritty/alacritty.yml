@@ -14,12 +14,12 @@ selection:
 # APPEARANCE
 font:
   normal:
-    family: "UbuntuMono Nerd Font"
-  size: 13.5
+    family: "Hack Nerd Font"
+  size: 12.5
 cursor:
   style:
-    shape: block
-    blinking: off
+    shape: Block
+    blinking: Off
     vi_mode_style: Beam
 window:
   opacity: 0.98
