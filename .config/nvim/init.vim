@@ -65,7 +65,11 @@ xnoremap <leader>p "_dP
 nnoremap <leader>dd :Lexplore %:p:h<CR>
 " open netrw in current work dir
 nnoremap <Leader>da :Lexplore<CR>
-
+" remap to move easily between panes
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 """"""""""""""""""""""""
 "    FILE BROWSER      "
 """"""""""""""""""""""""
