@@ -1,0 +1,8 @@
+[core]
+account = christophe.bahin@catercare.com.au
+project = proj-it-resources
+
+[compute]
+region = australia-southeast1
+zone = australia-southeast1-a
+
