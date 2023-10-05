@@ -6,7 +6,7 @@ fi
 ## set p10k instant prompt to be quiet
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 ## enabling vim mode
-bindkey -v
+# bindkey -v
 ## source theme
 source "${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh"
 ## path : ajout au path de .bin (for user binaries)
