@@ -77,7 +77,7 @@ export TASKRC=${XDG_CONFIG_HOME:-$HOME/.config}/task/taskrc
 export VAGRANT_DEFAULT_PROVIDER=libvirt
 export VAGRANT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/vagrant
 ## GAM
-export GAMCFGDIR=/home/christophe/.config/gamadv-xtd3
+export GAMCFGDIR=${XDG_CONFIG_HOME:-$HOME/.config}/gamadv-xtd3
 ## gcloud
 export CLOUDSDK_PYTHON_SITEPACKAGES=1 # allows usage of external (non gcloud) py packages
 ## FZF
@@ -141,7 +141,6 @@ alias zdate='date --utc +%FT%T.%3NZ'
 alias chx='chmod +x'
 ## GAM
 #unalias gam # unaliasing as can be set by other programs
-alias gam='/home/christophe/.config/gamadv-xtd3/gam'
 alias gamoc='gam oauth create christophe.bahin@¢atercare.com.au'
 ## Docker
 alias dex='docker exec -it'
