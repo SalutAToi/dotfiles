@@ -15,3 +15,6 @@ lvim.format_on_save.pattern = { "*.md" }
 -- setup linting
 local linters = require "lvim.lsp.null-ls.linters"
 linters.setup { { command = "markdownlint", filetypes = { "markdown" } } }
+
+-- user command (alias) to make switching to the filetype easier
+vim.api.nvim_create_user_command("Md", "set filetype=markdown")
