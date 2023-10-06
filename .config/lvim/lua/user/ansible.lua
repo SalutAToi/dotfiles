@@ -2,6 +2,7 @@
 lvim.builtin.treesitter.ensure_installed = {
     "yaml",
 }
+lvim.lsp.installer.setup.ensure_installed = { "ansiblels", "ansiblelint" }
 
 local opts = {}
 require("lvim.lsp.manager").setup("ansiblels", opts)

@@ -5,6 +5,10 @@ reload("user.keybindings")
 -- plugin install
 reload("user.plugins")
 reload("user.plugins")
--- plugin configuration
+-- core/other plugin conf
+reload("user.alpha")
+-- dev plugin configuration
 reload("user.python")
 reload("user.ansible")
+reload("user.markdown")
+reload("user.terraform")
