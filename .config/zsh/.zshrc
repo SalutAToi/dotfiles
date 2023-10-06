@@ -35,7 +35,7 @@ antigen bundles <<EOBUNDLES
     ohmyzsh/ohmyzsh plugins/sudo
     ohmyzsh/ohmyzsh plugins/taskwarrior
     ohmyzsh/ohmyzsh plugins/command-not-found
-    ohmyzsh/ohmyzsh plugins/colored-man-pages
+    ael-code/zsh-colored-man-pages
     ohmyzsh/ohmyzsh plugins/gcloud
     ohmyzsh/ohmyzsh plugins/terraform
     ohmyzsh/ohmyzsh plugins/vagrant
