@@ -1,0 +1,45 @@
+{
+    "git.confirmSync": false,
+    "explorer.confirmDragAndDrop": false,
+    "yaml.customTags": [
+        "!encrypted/pkcs1-oaep scalar",
+        "!vault scalar"
+    ],
+    "redhat.telemetry.enabled": false,
+    "keyboard.dispatch": "keyCode",
+    "explorer.confirmDelete": false,
+    "vim.useSystemClipboard": true,
+    "xml.server.vmargs": "-Xmx256M",
+    "editor.lineNumbers": "relative",
+    "vim.easymotion": true,
+    "vim.enableNeovim": true,
+    "vim.neovimUseConfigFile": true,
+    "vim.statusBarColorControl": true,
+    "vim.smartRelativeLine": true,
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#5f0000",
+        "statusBar.noFolderBackground": "#5f0000",
+        "statusBar.debuggingBackground": "#5f0000"
+    },
+    "vim.searchHighlightTextColor": "#C2C379",
+    "vim.leader": "ù",
+    "editor.fontFamily": "\"UbuntuMono Nerd Font\"",
+    "terminal.integrated.fontSize": 16,
+    "editor.fontSize": 16,
+    "python.formatting.autopep8Args": [
+        "--max-line-length=140"
+    ],
+    "editor.mouseWheelZoom": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackArgs": [
+        "--line-length=100"
+    ],
+    "terminal.integrated.fontFamily": "\"UbuntuMono Nerd Font\"",
+    "telemetry.telemetryLevel": "off",
+    "workbench.colorTheme": "Monokai",
+    "files.trimTrailingWhitespace": true,
+    "workbench.editorAssociations": {
+        "*.pdf": "default"
+    },
+
+}
