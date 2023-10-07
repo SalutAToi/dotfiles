@@ -27,7 +27,3 @@ vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- file settings
 lvim.format_on_save = true
-
--- keybindings
----- remapping terminal key
-lvim.builtin.terminal.open_mapping = "<c-t>"

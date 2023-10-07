@@ -1,7 +1,7 @@
-lvim.lsp.installer.setup.ensure_installed = { "terraform-ls", "tflint" }
+lvim.lsp.installer.setup.ensure_installed = { "terraformls", "tflint" }
 
 local opts = {}
-require("lvim.lsp.manager").setup("terraform-ls", opts)
+require("lvim.lsp.manager").setup("terraformls", opts)
 require("lvim.lsp.manager").setup("tflint", opts)
 
 -- -- setup linting

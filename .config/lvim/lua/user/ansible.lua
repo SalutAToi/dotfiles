@@ -12,4 +12,4 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup { { command = "ansiblelint", filetypes = { "yaml.ansible" } } }
 
 -- user command (alias) to make switching to the filetype easier
-vim.api.nvim_create_user_command("Ans", "set filetype=yaml.ansible")
+vim.api.nvim_create_user_command("Ans", "set filetype=yaml.ansible", {})

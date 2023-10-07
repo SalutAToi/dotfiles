@@ -17,4 +17,4 @@ local linters = require "lvim.lsp.null-ls.linters"
 linters.setup { { command = "markdownlint", filetypes = { "markdown" } } }
 
 -- user command (alias) to make switching to the filetype easier
-vim.api.nvim_create_user_command("Md", "set filetype=markdown")
+vim.api.nvim_create_user_command("Mdn", "set filetype=markdown", {})
