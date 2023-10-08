@@ -112,7 +112,8 @@ export ICEAUTHORITY=${XDG_CONFIG_HOME:-$HOME/.config}/ICEauthority
 export ANDROID_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/android
 export ANDROID_USER_HOME=$ANDROID_HOME
 ## ANSIBLE
-export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/ansible
+export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/ansible # probably does not work with pipx
+export ANSIBLE_CONFIG="${XDG_DATA_HOME:-$HOME/.config}"/ansible/ansible.cfg
 ## AZURE CLI
 export AZURE_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"/azure
 ## DOCKER
