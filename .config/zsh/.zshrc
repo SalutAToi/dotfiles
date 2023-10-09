@@ -20,6 +20,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 setopt auto_cd
 
 # PLUGINS
+## workaround vi-mode keybinding issue (before loading plugin)
+### see https://github.com/jeffreytse/zsh-vi-mode/blob/master/README.md
+export ZVM_INIT_MODE=sourcing
 ## where to store plugin manager files
 export ADOTDIR=${XDG_DATA_HOME:-$HOME/.local/share}/antidote
 ## installing plugin manager if not exist

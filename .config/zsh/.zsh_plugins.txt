@@ -1,23 +1,23 @@
 # .zsh_plugins.txt
 
+# graphical
+ael-code/zsh-colored-man-pages
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-syntax-highlighting
+
+# theme
+romkatv/powerlevel10k
+
 # completions
 ohmyzsh/ohmyzsh path:plugins/terraform
 ohmyzsh/ohmyzsh path:plugins/gcloud
 ohmyzsh/ohmyzsh path:plugins/vagrant
 ohmyzsh/ohmyzsh path:plugins/taskwarrior
-zsh-users/zsh-completions
 belak/zsh-utils path:completion
-
-# graphical
-ael-code/zsh-colored-man-pages
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-completions
 
 # usage
 jeffreytse/zsh-vi-mode
 ohmyzsh/ohmyzsh path:plugins/sudo
 ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/fzf
-
-# theme
-romkatv/powerlevel10k
