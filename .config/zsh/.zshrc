@@ -9,45 +9,25 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # bindkey -v
 ## source theme
 source "${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh"
+# set home for zsh
+export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 ## path : ajout au path de .bin (for user binaries)
 export PATH=$PATH:/home/christophe/.local/bin
-# plugin manager
-## where to store plugin manager files
-export ADOTDIR=${XDG_DATA_HOME:-$HOME/.local/share}/antigen
-## where to store plugin manager cache
-export ANTIGEN_CACHE=${XDG_CACHE_HOME:-$HOME/.cache}/antigen/init.zsh
-source /usr/share/zsh-antigen/antigen.zsh
-# autocompletion
-autoload -Uz compinit
-## setting completion file path
-compinit -d "${XDG_CACHE_HOME:-$HOME/.cache}"/zsh/zcompdump-"$ZSH_VERSION"
+# autocompletion (mostly managed by plugins)
 ## case insensitive autocompletion style
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 ## cd to a path when typed
 setopt auto_cd
 
 # PLUGINS
-## workaround vi-mode keybinding issue (before loading plugin)
-### see https://github.com/jeffreytse/zsh-vi-mode/blob/master/README.md
-export ZVM_INIT_MODE=sourcing
-antigen bundles <<EOBUNDLES
-    jeffreytse/zsh-vi-mode
-    ohmyzsh/ohmyzsh plugins/sudo
-    ohmyzsh/ohmyzsh plugins/taskwarrior
-    ohmyzsh/ohmyzsh plugins/command-not-found
-    ael-code/zsh-colored-man-pages
-    ohmyzsh/ohmyzsh plugins/gcloud
-    ohmyzsh/ohmyzsh plugins/terraform
-    ohmyzsh/ohmyzsh plugins/vagrant
-    zsh-users/zsh-syntax-highlighting
-    zsh-users/zsh-autosuggestions
-    zsh-users/zsh-completions
-    ohmyzsh/ohmyzsh plugins/fzf
-EOBUNDLES
-## theme
-antigen theme romkatv/powerlevel10k
-antigen apply
-
+## where to store plugin manager files
+export ADOTDIR=${XDG_DATA_HOME:-$HOME/.local/share}/antidote
+## installing plugin manager if not exist
+[[ -e $ADOTDIR ]] ||git clone https://github.com/mattmc3/antidote.git $ADOTDIR
+## sourcing antigen
+source ${ADOTDIR}/antidote.zsh
+## sourcing plugins
+source ${ZDOTDIR}/.zsh_plugins.zsh
 
 
 # HISTORY CONFIGURATION
@@ -66,9 +46,11 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+
 # GUI CONFIGURATIONS
 ## qt theme designation
 export QT_QPA_PLATFORMTHEME=qt5ct
+
 
 # PROGRAM CONFIGURATIONS (sourcing, env vars, functions, uncluttering $HOME)
 ## Taskwarrior
