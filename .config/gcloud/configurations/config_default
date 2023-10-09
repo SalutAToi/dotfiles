@@ -6,3 +6,9 @@ project = proj-it-resources
 region = australia-southeast1
 zone = australia-southeast1-a
 
+[auth]
+disable_credentials = false
+
+[builds]
+region = australia-southeast1
+
