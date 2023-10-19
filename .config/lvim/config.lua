@@ -6,6 +6,7 @@ reload("user.keybindings")
 reload("user.plugins")
 -- core/other plugin conf
 reload("user.alpha")
+reload("user.telescope")
 -- dev plugin configuration
 reload("user.python")
 reload("user.ansible")
