@@ -24,6 +24,8 @@ vim.opt.showmode = true       -- show current vim mode in status bar
 vim.opt.foldenable = false
 vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+---- statusline
+lvim.builtin.lualine.sections.lualine_c = { { "filename", path = 1 } }
 
 -- file settings
 lvim.format_on_save = true
