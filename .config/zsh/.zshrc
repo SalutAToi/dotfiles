@@ -8,7 +8,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 ## enabling vim mode
 # bindkey -v
 ## source theme
-source "${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh"
+source "${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh" || echo "Powerlevel10k not yet installed. Re-source or restart shell after completion."
 # set home for zsh
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 ## path : ajout au path de .bin (for user binaries)
@@ -26,9 +26,11 @@ export ZVM_INIT_MODE=sourcing
 ## where to store plugin manager files
 export ADOTDIR=${XDG_DATA_HOME:-$HOME/.local/share}/antidote
 ## installing plugin manager if not exist
-[[ -e $ADOTDIR ]] ||git clone https://github.com/mattmc3/antidote.git $ADOTDIR
-## sourcing antigen
+[[ -e $ADOTDIR ]] || git clone https://github.com/mattmc3/antidote.git $ADOTDIR
+## sourcing antidote
 source ${ADOTDIR}/antidote.zsh
+## creating plugin file if not exist
+[[ -e ${ZDOTDIR}/.zsh_plugins.zsh ]] || antidote load
 ## sourcing plugins
 source ${ZDOTDIR}/.zsh_plugins.zsh
 
@@ -125,7 +127,14 @@ alias tui='taskwarrior-tui'
 alias drm='rm -rf'
 alias zdate='date --utc +%FT%T.%3NZ'
 alias chx='chmod +x'
-## GAM
+alias ll='exa -l'
+alias lla='exa -la'
+alias tree='exa --tree --long'
+alias bat='batcat'
+## Tmux
+alias tns='tmux new-session -s'
+alias tas='tmux attach-session -t'
+## gam
 #unalias gam # unaliasing as can be set by other programs
 alias gamoc='gam oauth create christophe.bahin@¢atercare.com.au'
 ## Docker

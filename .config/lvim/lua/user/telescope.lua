@@ -1,4 +1,4 @@
-require("telescope").setup({})
+require("telescope").setup()
 
 -- appearence options
 lvim.builtin.telescope.defaults.layout_config = {
@@ -31,6 +31,10 @@ lvim.builtin.telescope.defaults.layout_config = {
 lvim.builtin.telescope.pickers.find_files.previewer = nil
 lvim.builtin.telescope.pickers.git_files.previewer = nil
 lvim.builtin.telescope.defaults.layout_strategy = "flex"
+-- display filepaths depending on similar entries
+lvim.builtin.telescope.defaults.path_display = "smart"
+lvim.builtin.telescope.defaults.dynamic_preview_title = true
+
 
 -- excluding files form search
 lvim.builtin.telescope.defaults.file_ignore_patterns = {
