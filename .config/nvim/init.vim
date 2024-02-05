@@ -30,6 +30,15 @@ set ttyfast " faster display
 set autoread
 set nobackup
 
+""""""""""""""""""""""""
+"      PLUGINS         "
+""""""""""""""""""""""""
+call plug#begin(stdpath('data') . '/plugged')
+    Plug 'preservim/nerdtree', { 'on': 'NERDTreeToggle' }
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+    Plug 'numToStr/Comment.nvim'
+call plug#end()
+
 
 """"""""""""""""""""""""
 "    STATUS BAR        "
@@ -70,6 +79,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" plugin shortcuts
+nnoremap <Leader> <C-f> :FZF<CR>
 """"""""""""""""""""""""
 "    FILE BROWSER      "
 """"""""""""""""""""""""
@@ -82,3 +93,9 @@ let g:netrw_localcopydircmd = 'cp -r' " change copy command for recursive copies
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
+"""""""""""""""""""""""""
+" PLUGINS CONFIGURATION "
+"""""""""""""""""""""""""
+lua << EOF
+require('Comment').setup()
+EOF
