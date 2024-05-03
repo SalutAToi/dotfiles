@@ -133,6 +133,7 @@ alias tree='exa --tree --long'
 alias bat='batcat'
 ## Tmux
 alias tns='tmux new-session -s'
+alias tls='tmux list-session'
 alias tas='tmux attach-session -t'
 ## gam
 #unalias gam # unaliasing as can be set by other programs

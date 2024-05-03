@@ -29,3 +29,5 @@ lvim.builtin.lualine.sections.lualine_c = { { "filename", path = 1 } }
 
 -- file settings
 lvim.format_on_save = true
+-- use whichkeys for z key
+lvim.builtin.which_key.setup.plugins.presets.z = true
