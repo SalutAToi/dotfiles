@@ -142,6 +142,7 @@ alias gamoc='gam oauth create christophe.bahin@¢atercare.com.au'
 alias dex='docker exec -it'
 ## clipboard
 alias clip='xclip -selection clipboard'
+alias pwd='pwd | xclip -selection clipboard'
 ## config management (git and dotfile repo)
 alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 ## ADB

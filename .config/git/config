@@ -1,3 +1,5 @@
 [user]
 	name = SalutAToi
 	email = 5493696+SalutAToi@users.noreply.github.com
+[core]
+	fileMode = false
