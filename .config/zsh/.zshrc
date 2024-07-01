@@ -1,7 +1,6 @@
 # SHELL CONFIGURATIONS (sourcing, env vars, functions)
 ## Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 ## set p10k instant prompt to be quiet
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
@@ -71,14 +70,14 @@ export CLOUDSDK_PYTHON_SITEPACKAGES=1 # allows usage of external (non gcloud) py
 ### exclusions 
 ### function for filepath ** completion (vim)
 _fzf_compgen_path() {
-    fdfind --follow . "$1"
+    fd --follow . "$1"
 }
 ### FZF function for dir ** completion (cd)
 _fzf_compgen_dir() {
-    fdfind --type d --follow . "$1"
+    fd --type d --follow . "$1"
 }
-export FZF_DEFAULT_COMMAND="fdfind ."
-export FZF_DIR_COMMAND="fdfind --type d ."
+export FZF_DEFAULT_COMMAND="fd ."
+export FZF_DIR_COMMAND="fd --type d ."
 export FZF_CTRL_T_COMMAND=$FZF_DIR_COMMAND
 ### default layouts and options
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
@@ -100,7 +99,7 @@ export ANDROID_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/android
 export ANDROID_USER_HOME=$ANDROID_HOME
 ## ANSIBLE
 export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/ansible # probably does not work with pipx
-export ANSIBLE_CONFIG="${XDG_DATA_HOME:-$HOME/.config}"/ansible/ansible.cfg
+export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/ansible/ansible.cfg
 ## AZURE CLI
 export AZURE_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"/azure
 ## DOCKER
@@ -113,6 +112,8 @@ export OMNISHARPHOME="${XDG_CONFIG_HOME:-$HOME/.config}"/omnisharp
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.config}"/java
 ## PYLINT
 export PYLINTHOME="${XDG_CONFIG_HOME:-$HOME/.config}"/pylint
+## EDITOR CONFIGURATION
+export EDITOR=nvim
 
 
 # Alias utilisateur
@@ -130,7 +131,6 @@ alias chx='chmod +x'
 alias ll='exa -l'
 alias lla='exa -la'
 alias tree='exa --tree --long'
-alias bat='batcat'
 ## Tmux
 alias tns='tmux new-session -s'
 alias tls='tmux list-session'
@@ -147,5 +147,3 @@ alias pwd='pwd | xclip -selection clipboard'
 alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 ## ADB
 alias adb='HOME=$ANDROID_HOME adb'
-## aliasing vim to lunarvim
-alias vim='lvim'
