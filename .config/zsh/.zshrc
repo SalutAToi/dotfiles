@@ -147,3 +147,5 @@ alias pwd='pwd | xclip -selection clipboard'
 alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 ## ADB
 alias adb='HOME=$ANDROID_HOME adb'
+## gcloud
+alias gssh='OPENSSL_CONF=/dev/null gcloud compute ssh --ssh-flag="-A"'
