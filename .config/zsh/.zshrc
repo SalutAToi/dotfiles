@@ -63,7 +63,7 @@ export TASKRC=${XDG_CONFIG_HOME:-$HOME/.config}/task/taskrc
 export VAGRANT_DEFAULT_PROVIDER=libvirt
 export VAGRANT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/vagrant
 ## GAM
-export GAMCFGDIR=${XDG_CONFIG_HOME:-$HOME/.config}/gamadv-xtd3
+export GAMCFGDIR=${XDG_CONFIG_HOME:-$HOME/.config}/gam
 ## gcloud
 export CLOUDSDK_PYTHON_SITEPACKAGES=1 # allows usage of external (non gcloud) py packages
 ## FZF
@@ -137,7 +137,7 @@ alias tls='tmux list-session'
 alias tas='tmux attach-session -t'
 ## gam
 #unalias gam # unaliasing as can be set by other programs
-alias gamoc='gam oauth create christophe.bahin@¢atercare.com.au'
+alias gamoc='gam oauth create christophe.bahin@catercare.com.au'
 ## Docker
 alias dex='docker exec -it'
 ## clipboard
@@ -148,4 +148,5 @@ alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
 ## ADB
 alias adb='HOME=$ANDROID_HOME adb'
 ## gcloud
-alias gssh='OPENSSL_CONF=/dev/null gcloud compute ssh --ssh-flag="-A"'
+alias gssh='OPENSSL_CONF=/dev/null gcloud compute ssh --ssh-key-file=~/.ssh/id_rsa_work --ssh-flag="-A"'
+alias gtssh='OPENSSL_CONF=/dev/null gcloud compute ssh --ssh-key-file=~/.ssh/id_rsa_work --ssh-flag="-A" --tunnel-through-iap'
