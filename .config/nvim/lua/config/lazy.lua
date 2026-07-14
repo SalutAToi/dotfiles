@@ -18,22 +18,6 @@ require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },
-    -- adding extras used to not always reinstall
-    -- lang
-    { import = "lazyvim.plugins.extras.lang.ansible" },
-    { import = "lazyvim.plugins.extras.lang.markdown" },
-    { import = "lazyvim.plugins.extras.lang.python" },
-    { import = "lazyvim.plugins.extras.lang.terraform" },
-    { import = "lazyvim.plugins.extras.lang.yaml" },
-    -- coding
-    { import = "lazyvim.plugins.extras.coding.mini-comment" },
-    { import = "lazyvim.plugins.extras.coding.mini-surround" },
-    { import = "lazyvim.plugins.extras.coding.yanky" },
-    { import = "lazyvim.plugins.extras.dap.core" },
-    -- editor
-    { import = "lazyvim.plugins.extras.editor.snacks_explorer" },
-    { import = "lazyvim.plugins.extras.editor.snacks_picker" },
-    { import = "lazyvim.plugins.extras.util.dot" },
     -- import/override with your plugins
     { import = "plugins" },
   },

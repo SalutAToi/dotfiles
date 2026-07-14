@@ -1,152 +1,150 @@
-# SHELL CONFIGURATIONS (sourcing, env vars, functions)
-## Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# ============================================================
+# INSTANT PROMPT (must be near top)
+# ============================================================
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-## set p10k instant prompt to be quiet
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-## enabling vim mode
-# bindkey -v
-## source theme
-source "${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh" || echo "Powerlevel10k not yet installed. Re-source or restart shell after completion."
-# set home for zsh
+
+
+# ============================================================
+# SHELL CORE
+# ============================================================
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-## path : ajout au path de .bin (for user binaries)
-export PATH=$PATH:/home/christophe/.local/bin
-# autocompletion (mostly managed by plugins)
-## case insensitive autocompletion style
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-## cd to a path when typed
+export PATH="$PATH:/home/christophe/.local/bin"
+export EDITOR=nvim
+
+# Theme
+source "${XDG_CONFIG_HOME:-$HOME/.config}/p10k/p10k.zsh" \
+  || echo "Powerlevel10k not yet installed. Re-source or restart shell after completion."
+
+# Auto-cd when typing a bare path
 setopt auto_cd
 
-# PLUGINS
-## workaround vi-mode keybinding issue (before loading plugin)
-### see https://github.com/jeffreytse/zsh-vi-mode/blob/master/README.md
-export ZVM_INIT_MODE=sourcing
-## where to store plugin manager files
-export ADOTDIR=${XDG_DATA_HOME:-$HOME/.local/share}/antidote
-## installing plugin manager if not exist
-[[ -e $ADOTDIR ]] || git clone https://github.com/mattmc3/antidote.git $ADOTDIR
-## sourcing antidote
-source ${ADOTDIR}/antidote.zsh
-## creating plugin file if not exist
-[[ -e ${ZDOTDIR}/.zsh_plugins.zsh ]] || antidote load
-## sourcing plugins
-source ${ZDOTDIR}/.zsh_plugins.zsh
+
+# ============================================================
+# COMPLETION
+# ============================================================
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+fpath=(~/.local/share/zsh/completions $fpath)
 
 
-# HISTORY CONFIGURATION
-## setting histfile location
-export HISTFILE=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history
-## size limits
+# ============================================================
+# HISTORY
+# ============================================================
+export HISTFILE="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zsh_history"
 HISTSIZE=5000
 SAVEHIST=5000
-# erase and avoid duplicates when searching through the history
-HISTDUP=erase
+
 setopt appendhistory
-setopt sharehistory
-setopt incappendhistory
-setopt hist_ignore_all_dups
-setopt hist_save_no_dups
-setopt hist_ignore_dups
-setopt hist_find_no_dups
+setopt sharehistory          # share history across sessions (replaces incappendhistory)
+setopt hist_ignore_all_dups  # don't record duplicate commands
+setopt hist_save_no_dups     # don't write duplicates to file
+setopt hist_ignore_dups      # don't record if same as previous
+setopt hist_find_no_dups     # skip duplicates when searching
 
 
-# GUI CONFIGURATIONS
-## qt theme designation
+# ============================================================
+# PLUGINS (antidote)
+# ============================================================
+# vi-mode workaround — must be set before plugin load
+export ZVM_INIT_MODE=sourcing
+
+export ADOTDIR="${XDG_DATA_HOME:-$HOME/.local/share}/antidote"
+[[ -d $ADOTDIR ]] || git clone https://github.com/mattmc3/antidote.git "$ADOTDIR"
+source "${ADOTDIR}/antidote.zsh"
+
+# Generate plugin file if missing, then source it
+[[ -e "${ZDOTDIR}/.zsh_plugins.zsh" ]] || antidote bundle < "${ZDOTDIR}/.zsh_plugins.txt" > "${ZDOTDIR}/.zsh_plugins.zsh"
+source "${ZDOTDIR}/.zsh_plugins.zsh"
+
+
+# ============================================================
+# GUI
+# ============================================================
 export QT_QPA_PLATFORMTHEME=qt5ct
 
 
-# PROGRAM CONFIGURATIONS (sourcing, env vars, functions, uncluttering $HOME)
-## Taskwarrior
-export TASKRC=${XDG_CONFIG_HOME:-$HOME/.config}/task/taskrc
-## Vagrant
+# ============================================================
+# XDG COMPLIANCE (uncluttering $HOME)
+# ============================================================
+# Task / CLI tools
+export TASKRC="${XDG_CONFIG_HOME:-$HOME/.config}/task/taskrc"
+export LPASS_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/lpass"
+export LESSHISTFILE="${XDG_CONFIG_HOME:-$HOME/.config}/less/history"
+export LESSKEY="${XDG_CONFIG_HOME:-$HOME/.config}/less/keys"
+export MPLAYER_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/mplayer"
+export ICEAUTHORITY="${XDG_CONFIG_HOME:-$HOME/.config}/ICEauthority"
+export GNUPGHOME="${XDG_CONFIG_HOME:-$HOME/.config}/gnupg"
+export PYLINTHOME="${XDG_CONFIG_HOME:-$HOME/.config}/pylint"
+export OMNISHARPHOME="${XDG_CONFIG_HOME:-$HOME/.config}/omnisharp"
+export GAMCFGDIR="${XDG_CONFIG_HOME:-$HOME/.config}/gam"
+
+# Dev / infrastructure
+export DOTFILES_REPO_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles"
 export VAGRANT_DEFAULT_PROVIDER=libvirt
-export VAGRANT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/vagrant
-## GAM
-export GAMCFGDIR=${XDG_CONFIG_HOME:-$HOME/.config}/gam
-## gcloud
-export CLOUDSDK_PYTHON_SITEPACKAGES=1 # allows usage of external (non gcloud) py packages
-## FZF
-### exclusions 
-### function for filepath ** completion (vim)
-_fzf_compgen_path() {
-    fd --follow . "$1"
-}
-### FZF function for dir ** completion (cd)
-_fzf_compgen_dir() {
-    fd --type d --follow . "$1"
-}
+export VAGRANT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/vagrant"
+export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/ansible"
+export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
+export AZURE_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/azure"
+export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
+export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gem"
+export ANDROID_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/android"
+export ANDROID_USER_HOME=$ANDROID_HOME
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.config}/java"
+
+# Google Cloud
+export CLOUDSDK_PYTHON_SITEPACKAGES=1
+
+
+# ============================================================
+# FZF
+# ============================================================
 export FZF_DEFAULT_COMMAND="fd ."
 export FZF_DIR_COMMAND="fd --type d ."
 export FZF_CTRL_T_COMMAND=$FZF_DIR_COMMAND
-### default layouts and options
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
-## LASTPASS CLI
-export LPASS_HOME=${XDG_CONFIG_HOME:-$HOME/.config}/lpass
-## DOTFILES
-export DOTFILES_REPO_DIR=${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles
-## GNUPG HOME
-export GNUPGHOME=${XDG_CONFIG_HOME:-$HOME/.config}/gnupg
-## LESS
-export LESSHISTFILE="${XDG_CONFIG_HOME:-$HOME/.config}/less/history"
-export LESSKEY="${XDG_CONFIG_HOME:-$HOME/.config}/less/keys"
-## MPLAYER
-export MPLAYER_HOME=${XDG_CONFIG_HOME:-$HOME/.config}/mplayer
-## ICEAUTHORITY
-export ICEAUTHORITY=${XDG_CONFIG_HOME:-$HOME/.config}/ICEauthority
-## ANDROID TOOLS
-export ANDROID_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/android
-export ANDROID_USER_HOME=$ANDROID_HOME
-## ANSIBLE
-export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/ansible # probably does not work with pipx
-export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/ansible/ansible.cfg
-## AZURE CLI
-export AZURE_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"/azure
-## DOCKER
-export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/docker
-## GEM (ruby ?)
-export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}"/gem
-## OMNISHARP (dotnet)
-export OMNISHARPHOME="${XDG_CONFIG_HOME:-$HOME/.config}"/omnisharp
-## OPENJDK
-export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.config}"/java
-## PYLINT
-export PYLINTHOME="${XDG_CONFIG_HOME:-$HOME/.config}"/pylint
-## EDITOR CONFIGURATION
-export EDITOR=nvim
+
+_fzf_compgen_path() { fd --follow . "$1" }
+_fzf_compgen_dir()  { fd --type d --follow . "$1" }
 
 
-# Alias utilisateur
-## Taskwarrior
+# ============================================================
+# ALIASES
+# ============================================================
+
+# Taskwarrior
 alias ts='task sync'
 alias tlap='task rc.list.all.projects=1 projects'
 alias tlat='task rc.list.all.tags=1 tags'
 alias tlday='task end.after:today-60hr completed'
 alias tal='task list'
 alias tui='taskwarrior-tui'
-## Alias raccourcis commande
+
+# Shell utilities
 alias drm='rm -rf'
 alias zdate='date --utc +%FT%T.%3NZ'
 alias chx='chmod +x'
-alias ll='exa -l'
-alias lla='exa -la'
-alias tree='exa --tree --long'
-## Tmux
+alias cpwd='pwd | xclip -selection clipboard'  # renamed from 'pwd' to avoid shadowing builtin
+alias clip='xclip -selection clipboard'
+
+# Tmux
 alias tns='tmux new-session -s'
 alias tls='tmux list-session'
 alias tas='tmux attach-session -t'
-## gam
-#unalias gam # unaliasing as can be set by other programs
-alias gamoc='gam oauth create christophe.bahin@catercare.com.au'
-## Docker
+
+# Docker
 alias dex='docker exec -it'
-## clipboard
-alias clip='xclip -selection clipboard'
-alias pwd='pwd | xclip -selection clipboard'
-## config management (git and dotfile repo)
-alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
-## ADB
-alias adb='HOME=$ANDROID_HOME adb'
-## gcloud
+
+# Google Cloud / SSH
 alias gssh='OPENSSL_CONF=/dev/null gcloud compute ssh --ssh-key-file=~/.ssh/id_rsa_work --ssh-flag="-A"'
 alias gtssh='OPENSSL_CONF=/dev/null gcloud compute ssh --ssh-key-file=~/.ssh/id_rsa_work --ssh-flag="-A" --tunnel-through-iap'
+
+# GAM (Google Workspace)
+alias gamoc='gam oauth create christophe.bahin@catercare.com.au'
+
+# ADB
+alias adb='HOME=$ANDROID_HOME adb'
+
+# Dotfiles bare-repo management
+alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
