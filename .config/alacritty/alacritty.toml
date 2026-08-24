@@ -97,3 +97,8 @@ blue = '#8CAAEE' # blue
 magenta = '#F4B8E4' # pink
 cyan = '#81C8BE' # teal
 white = '#B5BFE2' # subtext1
+
+[[keyboard.bindings]]
+key = "Return"
+mods = "Shift"
+chars = "\u001B\r"
