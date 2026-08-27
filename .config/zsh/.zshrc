@@ -11,7 +11,7 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # SHELL CORE
 # ============================================================
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-export PATH="$PATH:/home/christophe/.local/bin"
+export PATH="$PATH:/home/$USER/.local/bin"
 export EDITOR=nvim
 
 # Theme
