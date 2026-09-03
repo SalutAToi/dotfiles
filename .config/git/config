@@ -1,5 +1,14 @@
 [user]
 	name = SalutAToi
 	email = 5493696+SalutAToi@users.noreply.github.com
+	signingkey = /home/christophe_perso/.ssh/id_ed25519
 [core]
 	fileMode = false
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
+[gpg "ssh"]
+	allowedSignersFile = /home/christophe_perso/.config/git/allowed_signers
