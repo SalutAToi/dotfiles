@@ -148,3 +148,4 @@ alias adb='HOME=$ANDROID_HOME adb'
 
 # Dotfiles bare-repo management
 alias config='/usr/bin/git --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
+alias lg-config='lazygit --git-dir=$DOTFILES_REPO_DIR --work-tree=$HOME'
