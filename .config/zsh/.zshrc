@@ -70,6 +70,7 @@ export QT_QPA_PLATFORMTHEME=qt5ct
 # ============================================================
 # Task / CLI tools
 export TASKRC="${XDG_CONFIG_HOME:-$HOME/.config}/task/taskrc"
+export DSTASK_GIT_REPO="${XDG_DATA_HOME:-$HOME/.local/share}/dstask"
 export LPASS_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/lpass"
 export LESSHISTFILE="${XDG_CONFIG_HOME:-$HOME/.config}/less/history"
 export LESSKEY="${XDG_CONFIG_HOME:-$HOME/.config}/less/keys"
@@ -85,7 +86,7 @@ export DOTFILES_REPO_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/dotfiles"
 export VAGRANT_DEFAULT_PROVIDER=libvirt
 export VAGRANT_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/vagrant"
 export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/ansible"
-export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
+# export ANSIBLE_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/ansible/ansible.cfg"
 export AZURE_CONFIG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/azure"
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/docker"
 export GEM_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/gem"
@@ -113,7 +114,7 @@ _fzf_compgen_dir()  { fd --type d --follow . "$1" }
 # ALIASES
 # ============================================================
 
-# Taskwarrior
+# Taskwarrior and dstask
 alias ts='task sync'
 alias tlap='task rc.list.all.projects=1 projects'
 alias tlat='task rc.list.all.tags=1 tags'
