@@ -19,7 +19,9 @@
     "workbench.colorCustomizations": {
         "statusBar.background": "#005f5f",
         "statusBar.noFolderBackground": "#005f5f",
-        "statusBar.debuggingBackground": "#005f5f"
+        "statusBar.debuggingBackground": "#005f5f",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
     },
     "vim.searchHighlightTextColor": "#C2C379",
     "vim.leader": "ù",
@@ -42,4 +44,6 @@
         "*.pdf": "default"
     },
     "terminal.external.linuxExec": "alacritty",
+    "claudeCode.preferredLocation": "panel",
+    "chat.viewSessions.orientation": "stacked",
 }
